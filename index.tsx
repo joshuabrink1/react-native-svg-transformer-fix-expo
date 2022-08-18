@@ -7,17 +7,14 @@ interface Props {
   fill?: string;
   replace: any;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const regBase64 = /^(.+)\,(.+)$/;
 const regPropReplace = /^\s*\{\s*([a-zA-Z0-9]*)\.?([a-zA-Z0-9]+)\s*\}\s*$/;
 
 const Index = memo(({ source: orsource, replace, ...rest }: Props) => {
-  const { width, height, className } = {
-    width: "auto",
-    height: "auto",
-    ...rest,
-  };
+  const { style, className } = rest;
 
   const [xml, setXml] = useState(null);
   const [source, setSource] = useState(null);
@@ -71,8 +68,7 @@ const Index = memo(({ source: orsource, replace, ...rest }: Props) => {
   return xml ? (
     <img
       className={className}
-      width={width}
-      height={height}
+      style={style}
       src={xmlToBase64(xml)}
     />
   ) : null;
